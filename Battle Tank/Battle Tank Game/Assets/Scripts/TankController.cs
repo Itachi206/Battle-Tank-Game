@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//generic singleton
 public class TankController<T> : MonoBehaviour where T : TankController<T>
 {
     private static T instance;
