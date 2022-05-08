@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//generic singleton
+
 public class TankController<T> : MonoBehaviour where T : TankController<T>
 {
     private static T instance;
@@ -10,8 +12,8 @@ public class TankController<T> : MonoBehaviour where T : TankController<T>
     {
         if (instance == null)
         {
-            instance = (T)this;
             DontDestroyOnLoad(this);
+            instance = (T)this;
         }
         else
         {
@@ -27,5 +29,3 @@ public class PlayerTank : TankController<PlayerTank>
     }
 }
 
-public class EnemyTank : TankController<EnemyTank>
-{ }
