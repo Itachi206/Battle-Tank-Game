@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class TankController<T> : MonoBehaviour where T : TankController<T>
 {
@@ -27,3 +28,4 @@ public class PlayerTank : TankController<PlayerTank>
         base.Awake();
     }
 }
+
