@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    [SerializeField] private TankView player;
+    [SerializeField] private GameObject player;
     private Vector3 offset;
     public Camera m_camera;
     private float CameraZoomOutSpeed = 0.0001f;
@@ -11,7 +11,7 @@ public class CameraControl : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.FindObjectOfType<TankView>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()

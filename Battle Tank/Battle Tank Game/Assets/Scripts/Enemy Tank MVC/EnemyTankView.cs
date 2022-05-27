@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class EnemyTankView : MonoBehaviour
 {
     [HideInInspector]public EnemyTankController enemyTankController;
-    public ScoreController _scoreController;
+    //public ScoreController _scoreController;
     public GameObject explosionPrefab;     
     internal AudioSource explosionAudio;
     internal ParticleSystem explosionParticles;
@@ -26,7 +26,7 @@ public class EnemyTankView : MonoBehaviour
         explosionParticles = Instantiate(explosionPrefab).GetComponent<ParticleSystem>();
         explosionAudio = explosionParticles.GetComponent<AudioSource>();
         explosionParticles.gameObject.SetActive(false);
-        _scoreController = GameObject.FindObjectOfType<ScoreController>();
+        //_scoreController = GameObject.FindObjectOfType<ScoreController>();
     }
 
     void Start()
@@ -44,11 +44,22 @@ public class EnemyTankView : MonoBehaviour
         enemyTankController = _enemyTankController;
     }      
 
+    //bullet Instantiation
     public void FireShell()
     {
         float _currentLaunchForce = 20f;
-        Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
-        shellInstance.velocity = _currentLaunchForce * fireTransform.forward;          
+        // Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
+        // shellInstance.velocity = _currentLaunchForce * fireTransform.forward;
+
+        Rigidbody bullet = ObjectPooler.Instance.GetPooleObject().GetComponent<Rigidbody>();
+        
+        if(bullet != null)
+        {
+            bullet.transform.position = fireTransform.position;
+            bullet.transform.rotation = fireTransform.rotation;
+            bullet.gameObject.SetActive(true);
+            bullet.velocity = _currentLaunchForce * fireTransform.forward;
+        }          
     }
   
     public void Death()

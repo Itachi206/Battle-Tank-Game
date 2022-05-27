@@ -6,6 +6,7 @@ public class ShellExplosion : MonoBehaviour
     public TankView player;
     public EnemyTankView enemy;
     public LayerMask TankMask;
+
     public ParticleSystem explosionParticles;
     public AudioSource explosionAudio;
     public float explosionForce = 500f;
@@ -16,8 +17,10 @@ public class ShellExplosion : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<TankView>(); 
-        enemy = GameObject.FindObjectOfType<EnemyTankView>();       
-        Destroy(gameObject, maxLifeTime);
+        enemy = GameObject.FindObjectOfType<EnemyTankView>();  
+        
+        // gameObject.SetActive(false)
+        // Destroy(gameObject, maxLifeTime);
     }
 
     [Obsolete]
@@ -65,12 +68,13 @@ public class ShellExplosion : MonoBehaviour
         }
 
         explosionParticles.transform.parent = null;
-
-        explosionParticles.Play();
+        gameObject.SetActive(false);        
+        explosionParticles.Play();               
         explosionAudio.Play();
-
-        Destroy(explosionParticles.gameObject, explosionParticles.duration);
-        Destroy(gameObject);
+        //new WaitForSecondsRealtime(explosionParticles.duration);
+        
+        Destroy(explosionParticles.gameObject, explosionParticles.duration);      
+        
     }
 
     private float CalculateDamage(Vector3 targetPosition, float maxDamage)

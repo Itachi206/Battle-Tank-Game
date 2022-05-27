@@ -101,13 +101,25 @@ public class TankView : MonoBehaviour
        return rb;
    }      
 
+    //Bullet Instantiation
    public void CreateShellInstance(float _currentLaunchForce)
    {
-       Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
-       shellInstance.velocity = _currentLaunchForce * fireTransform.forward;
+       //Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
 
-       shootingAudio.clip = fireClip;
-       shootingAudio.Play();       
+        Rigidbody bullet = ObjectPooler.Instance.GetPooleObject().GetComponent<Rigidbody>();
+        
+        if(bullet != null)
+        {
+            bullet.transform.position = fireTransform.position;
+            bullet.transform.rotation = fireTransform.rotation;
+            bullet.gameObject.SetActive(true);
+            bullet.velocity = _currentLaunchForce * fireTransform.forward;
+        }
+
+        //shellInstance.velocity = _currentLaunchForce * fireTransform.forward;
+
+        shootingAudio.clip = fireClip;
+        shootingAudio.Play();       
    }
    
    private void OnColliderEnter(Collision other)

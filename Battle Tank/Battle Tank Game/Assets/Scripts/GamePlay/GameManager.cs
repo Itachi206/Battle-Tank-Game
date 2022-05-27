@@ -29,7 +29,8 @@ public class GameManager : MonoGenericSingleton<GameManager>
         {
             enemyObjects[i].Death();
             yield return new WaitForSeconds(0.05f);            
-        }        
+        }
+        yield return new WaitForSeconds(0.05f);        
     }
 
     private IEnumerator DestroyGround()

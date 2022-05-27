@@ -109,7 +109,7 @@ public class TankController
 
         tankView.explosionParticles.Play();
         tankView.explosionAudio.Play();
-
+        
         tankView.gameObject.SetActive(false);
 
         GameManager.Instance.DestroyAllGameObjects();
